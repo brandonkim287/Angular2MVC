@@ -1,0 +1,108 @@
+﻿<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        User Management
+    </div>
+    <div class='panel-body'>
+        <div class='table-responsive'>
+            <div>
+                <search-list (change)="criteriaChange($event)"></search-list>
+            </div>
+            <div style="padding-bottom:10px"><button class="btn btn-primary" (click)="addUser()">Add</button></div>
+            <div class="alert alert-info" role="alert" *ngIf="usersLoading"><img id="loading" src="../../images/loading.gif" width="32" height="32" /> Loading...</div>
+            <div *ngIf='users && users.length==0' class="alert alert-info" role="alert">No records found!</div>
+            <table class='table table-striped' *ngIf='users && users.length'>
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Gender</th>
+                        <th>Address</th>
+                        <th>Interests</th>
+                        <th>Age</th>
+                        <th>Date of Birth</th>
+                        <th>Image Name</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users | userFilter: listFilter">
+                        <td>{{user.FirstName}}</td>
+                        <td>{{user.LastName}}</td>
+                        <td>{{user.Gender}}</td>
+                        <td>{{user.Address}}</td>
+                        <td>{{user.Interests}}</td>
+                        <td>{{user.Age}}</td>
+                        <td>{{user.DateOfBirth}}</td>
+                        <td>{{user.Image}}</td>
+                        <td>
+                            <button title="Edit" class="btn btn-primary" (click)="editUser(user.Id)">Edit</button>
+                            <button title="Delete" class="btn btn-danger" (click)="deleteUser(user.Id)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+            </div>
+        </div>
+        <div *ngIf="msg" role="alert" class="alert alert-info alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            {{msg}}
+        </div>
+    </div>
+</div>
+
+<modal #modal>
+    <form novalidate (ngSubmit)="onSubmit(userFrm)" [formGroup]="userFrm">
+        <modal-header [show-close]="true">
+            <h4 class="modal-title">{{modalTitle}}</h4>
+        </modal-header>
+        <modal-body>
+
+            <div class="form-group">
+                <div>
+                    <span>First name*</span>
+                    <input type="text" class="form-control" placeholder="First Name" formControlName="FirstName">
+                </div>
+                <div>
+                    <span>Last name*</span>
+                    <input type="text" class="form-control" placeholder="Last Name" formControlName="LastName">
+                </div>
+                <div>
+                    <span>Gender*</span>
+                    <select formControlName="Gender" class="form-control">
+                        <option>Male</option>
+                        <option>Female</option>
+                    </select>
+                </div>
+                <div>
+                    <span>Address*</span>
+                    <input type="text" class="form-control" placeholder="Address" formControlName="Address">
+                </div>
+                <div>
+                    <span>Interests*</span>
+                    <input type="text" class="form-control" placeholder="Interests" formControlName="Interests">
+                </div>
+                <div>
+                    <span>Age*</span>
+                    <input type="number" min="0" class="form-control" placeholder="Age" formControlName="Age">
+                </div>
+                <div>
+                    <span>Date of Birth*</span>
+                    <input type="text" class="form-control" placeholder="MM/DD/YYYY" formControlName="DateOfBirth">
+                </div>
+                <div>
+                    <span>Image Name*</span>
+                    <input type="text" class="form-control" placeholder="Image Name(i.e., users.jpg)" formControlName="Image">
+                </div>
+            </div>
+        </modal-body>
+        <modal-footer>
+            <div>
+                <a class="btn btn-default" (click)="modal.dismiss()">Cancel</a>
+                <button type="submit" [disabled]="userFrm.invalid" class="btn btn-primary">{{modalBtnTitle}}</button>
+            </div>
+        </modal-footer>
+    </form>
+</modal>

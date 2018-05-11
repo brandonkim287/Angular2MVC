@@ -1,0 +1,37 @@
+﻿<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        <span class="glyphicon glyphicon-user"></span>
+        People
+    </div>
+    <div>
+        <br />
+        <search-list (change)="criteriaChange($event)"></search-list>
+    </div>
+    <div class='panel-body'>
+        <div class="alert alert-info" role="alert" *ngIf="usersLoading"><img id="loading" src="../../images/loading.gif" width="32" height="32" /> Loading...</div>
+        <div *ngIf='users && users.length==0' class="alert alert-info" role="alert">No records found!</div>
+        <div class="row">
+            <div class="col" *ngFor="let user of users | userFilter: listFilter">
+                <div class="card">
+                    <img height="160" src="../../images/{{user.Image}}">
+                    <div class="container">
+                        <h4>{{user.FirstName}} {{user.LastName}}</h4>
+                        <p><strong>Gender:</strong> {{user.Gender}}</p>
+                        <p><strong>Address:</strong> {{user.Address}}</p>
+                        <p><strong>Interests:</strong> {{user.Interests}}</p>
+                        <p><strong>Age:</strong> {{user.Age}}&emsp;&emsp;<strong>Date of Birth:</strong> {{user.DateOfBirth}}</p>
+                    </div>
+                </div>
+
+                <br />
+            </div>
+
+        </div>
+        <div *ngIf="msg" role="alert" class="alert alert-info alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            {{msg}}
+        </div>
+    </div>
+</div>

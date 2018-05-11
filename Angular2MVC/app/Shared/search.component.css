@@ -1,0 +1,10 @@
+﻿.img1 {
+    width: 100px;
+    height: 100px;
+    margin-left: 25px;
+}
+
+.img1::before {
+    position: absolute;
+    font-size: 100px;
+}

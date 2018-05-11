@@ -1,0 +1,43 @@
+﻿/* Three columns side by side */
+.col {
+    float: left;
+    width: 33.3%;
+    margin-top: 0px;
+    margin-bottom: 6px;
+    padding: 0 8px;
+}
+h4 {
+    font: bold 24px/1.5 Trebuchet MS;
+}
+
+img {
+    /*border: 1px solid #ddd;*/ /*Gray border*/ 
+    /*border-radius: 4px;*/ /* Rounded border*/ 
+
+    padding: 5px; /* Some padding */
+    width: 150px; /* Set a small width*/
+}
+
+p {
+    font: 200 12px/1.5;
+    font-family: 'Trebuchet MS';
+    margin: 0;
+    padding: 2px;
+}
+
+/* Some left and right padding inside the container */
+.container {
+    padding: 0 16px;
+}
+   
+/* Clear floats */
+.container::after, .row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+/* Add some shadows to create a card effect */
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
